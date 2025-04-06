@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Número</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
+</head>
+<body>
+    <div class="container">
+        <h1>Verificar Número</h1>
+        <p id="message">Haz clic en el botón para confirmar la verificación de tu número.</p>
+        <!-- Form submits data back to the Edge Function -->
+        <form id="verify-form" method="POST" action="https://qknogktmkyxytzrxqkfb.supabase.co/functions/v1/verify-number">
+            <input type="hidden" name="id" id="citizen-id" value="">
+            <input type="hidden" name="token" id="verification-token" value="">
+            <button type="submit" id="verify-button">Verificar Mi Número</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script> <!-- Link to external JS -->
+</body>
+</html>
