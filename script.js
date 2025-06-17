@@ -20,10 +20,38 @@ document.addEventListener('DOMContentLoaded', () => {
         tokenInput.value = token;
         console.log('ID and Token populated in form.');
 
-        // Optional: You could add a check here to see if the form action is correct, 
-        // but it's set in the HTML already.
-        // console.log('Form action:', form.action); 
-
+        // Nueva lógica: POST vía fetch al hacer clic
+        verifyButton.onclick = async (e) => {
+            e.preventDefault();
+            verifyButton.disabled = true;
+            messageElement.textContent = 'Verificando...';
+            messageElement.style.color = '';
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = '';
+            const formData = new FormData();
+            formData.append('id', citizenId);
+            formData.append('token', token);
+            try {
+                const response = await fetch('https://qknogktmkyxytzrxqkfb.supabase.co/functions/v1/verify-number', {
+                    method: 'POST',
+                    body: formData
+                });
+                const text = await response.text();
+                resultDiv.textContent = text;
+                if (response.ok) {
+                    resultDiv.style.color = 'green';
+                    messageElement.textContent = '¡Verificación completada!';
+                } else {
+                    resultDiv.style.color = 'red';
+                    messageElement.textContent = 'No se pudo verificar el número.';
+                }
+            } catch (err) {
+                resultDiv.textContent = 'Error de red o del servidor.';
+                resultDiv.style.color = 'red';
+                messageElement.textContent = 'No se pudo verificar el número.';
+            }
+            verifyButton.disabled = false;
+        };
     } else {
         // Handle missing parameters or elements - disable form/button and show error
         if (messageElement) {

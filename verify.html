@@ -11,11 +11,12 @@
         <h1>Verificar Número</h1>
         <p id="message">Haz clic en el botón para confirmar la verificación de tu número.</p>
         <!-- Form submits data back to the Edge Function -->
-        <form id="verify-form" method="POST" action="https://qknogktmkyxytzrxqkfb.supabase.co/functions/v1/verify-number">
+        <form id="verify-form">
             <input type="hidden" name="id" id="citizen-id" value="">
             <input type="hidden" name="token" id="verification-token" value="">
-            <button type="submit" id="verify-button">Verificar Mi Número</button>
+            <button type="button" id="verify-button">Verificar Mi Número</button>
         </form>
+        <div id="result"></div>
     </div>
 
     <script src="script.js"></script> <!-- Link to external JS -->
